@@ -4,17 +4,23 @@ import * as path from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './res/src/user.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
-  imports: [TypeOrmModule.forRootAsync({
-    useFactory: () => ({
-      retryAttempts: 10, //연결 재시도 횟수
+  imports: [ConfigModule.forRoot({
+    isGlobal: true,
+  }),
+
+  TypeOrmModule.forRootAsync({
+    inject: [ConfigService],
+    useFactory: (configService: ConfigService) => ({
+      retryAttempts: configService.get('NODE_ENV') === 'prod' ? 10: 1, //연결 재시도 횟수
       type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      database: 'myhomepage',
-      username: 'root',
-      password: '0000',
+      host: configService.get('DB_HOST'),
+      port: Number(configService.get('DB_NAME')),
+      database: configService.get('DB_NAME'),
+      username: configService.get('DB_USER'),
+      password: configService.get('DB_PASSWORD'),
       entities: [
         path.join(__dirname, '/entities/**/*.entity.{js, ts}'),
       ],
@@ -27,4 +33,4 @@ import { UserModule } from './res/src/user.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
