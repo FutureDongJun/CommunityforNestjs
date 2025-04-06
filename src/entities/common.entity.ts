@@ -7,7 +7,7 @@ export class CommonBigPKEntity {
     @CreateDateColumn({ type: 'timestamp'}) //해당 데코레이터는 생성일자를 적용
     createdAt : Date;
 
-    @UpdateDateColumn({ type: 'timestamp', nullable: true}) //update 쿼리를 날릴 때, 자동으로 수정일자를 넣어줌
+    @UpdateDateColumn({ type: 'timestamp', nullable: true}) //update 쿼리를 날릴 때, 자동으로 수정일자를 넣어줌.
     updatedAt : Date | null;
 
     @DeleteDateColumn({ type: 'timestamp', nullable: true}) // Soft Delete를 위한 칼럼을 말함. typeorm의 softDelete 함수를 사용해서 삭제 날짜를 넣어줌.
