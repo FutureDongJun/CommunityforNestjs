@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './res/src/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
 
 console.log(`.env.${process.env.NODE_ENV}`);
 
@@ -32,7 +33,8 @@ console.log(`.env.${process.env.NODE_ENV}`);
       timezone: 'local',
     })
   }),
-    UserModule],
+    UserModule,
+    AuthModule,],
   controllers: [AppController],
   providers: [AppService],
 })
