@@ -23,7 +23,7 @@ export class AuthService {
             throw new BadRequestException('이메일이 잘못되었습니다.');
         }
 
-        //verify password
+        //verify password 과정
         const isPasswordMatch = await compare(password, user.password);
 
         if (!isPasswordMatch) {
