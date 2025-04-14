@@ -10,8 +10,8 @@ export class ArticleService {
         private readonly articleRepository: Repository<ArticleEntity>,
     ) {}
 
-    async createArticle() {
-        await this.articleRepository.save({
+    async createArticle(title:string, content: string, userId: string) {
+        const article = await this.articleRepository.save({
             title : title,
             content : content,
             userId : userId,
