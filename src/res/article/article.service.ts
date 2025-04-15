@@ -56,4 +56,13 @@ export class ArticleService {
 
         return { affected: updateResult?.affected };
     }
+
+    async removeArticle(userId: string, articleId: string) {
+        const deleteResult = await this.articleRepository.softDelete({
+            id: articleId,
+            userId: userId,
+        });
+
+        return { affected: deleteResult?.affected };
+    }
 }
