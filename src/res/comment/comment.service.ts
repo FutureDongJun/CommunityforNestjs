@@ -11,15 +11,15 @@ export class CommentService {
     ) { }
 
     async createComment(
-        userId: string,
-        parentId: string,
         content: string,
+        parentId: string,
+        userId: string,
         articleId: string,
     ) {
         const comment = await this.commentRepository.save({
-            userId: userId,
-            parentId: parentId,
             content: content,
+            parentId: parentId,
+            userId: userId,
             articleId: articleId,
         });
 
@@ -56,6 +56,6 @@ export class CommentService {
             userId: userId,
         });
 
-        return { affected: deleteResult?.affected };
+        return { affected: deleteResult?.affected }
     }
 }
