@@ -7,6 +7,7 @@ import { UserModule } from './res/src/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { ArticleModule } from './res/article/article.module';
+import { CommentModule } from './res/comment/comment.module';
 
 console.log(`.env.${process.env.NODE_ENV}`);
 
@@ -19,7 +20,7 @@ console.log(`.env.${process.env.NODE_ENV}`);
   TypeOrmModule.forRootAsync({
     inject: [ConfigService],
     useFactory: (configService: ConfigService) => ({
-      retryAttempts: configService.get('NODE_ENV') === 'prod' ? 10: 1, //연결 재시도 횟수
+      retryAttempts: configService.get('NODE_ENV') === 'prod' ? 10 : 1, //연결 재시도 횟수
       type: 'mysql',
       host: configService.get('DB_HOST'),
       port: Number(configService.get('DB_NAME')),
@@ -36,7 +37,8 @@ console.log(`.env.${process.env.NODE_ENV}`);
   }),
     UserModule,
     AuthModule,
-    ArticleModule],
+    ArticleModule,
+    CommentModule,],
   controllers: [AppController],
   providers: [AppService],
 })
