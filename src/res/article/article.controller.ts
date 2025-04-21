@@ -3,7 +3,9 @@ import { ArticleService } from "./article.service";
 import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
 import { User } from "../src/user.decorator";
 import { createArticleDto } from "src/dtos/article/create-article.dto";
+import { ApiTags } from "@nestjs/swagger";
 
+@ApiTags('게시글 API')
 @Controller('article')
 export class ArticleController {
     constructor(private readonly articleService: ArticleService) {}
