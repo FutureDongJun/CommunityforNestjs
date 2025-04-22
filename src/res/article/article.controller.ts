@@ -3,13 +3,20 @@ import { ArticleService } from "./article.service";
 import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
 import { User } from "../src/user.decorator";
 import { createArticleDto } from "src/dtos/article/create-article.dto";
-import { ApiTags } from "@nestjs/swagger";
+import { ApiBody, ApiOperation, ApiTags } from "@nestjs/swagger";
 
 @ApiTags('게시글 API')
 @Controller('article')
 export class ArticleController {
     constructor(private readonly articleService: ArticleService) {}
 
+    @ApiOperation({
+        summary: '게시글 작성 API',
+        description: '유저가 게시글을 작성함.',
+    })
+    @ApiBody({
+        type: createArticleDto
+    })
     @UseGuards(JwtAuthGuard)
     @Post()
     async createArticle(@Body() body: createArticleDto, @User() user) {
