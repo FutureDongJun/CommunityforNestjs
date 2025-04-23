@@ -3,7 +3,7 @@ import { ArticleService } from "./article.service";
 import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
 import { User } from "../src/user.decorator";
 import { createArticleDto } from "src/dtos/article/create-article.dto";
-import { ApiBody, ApiOperation, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiBody, ApiOperation, ApiTags } from "@nestjs/swagger";
 
 @ApiTags('게시글 API')
 @Controller('article')
@@ -17,6 +17,7 @@ export class ArticleController {
     @ApiBody({
         type: createArticleDto
     })
+    @ApiBearerAuth()
     @UseGuards(JwtAuthGuard)
     @Post()
     async createArticle(@Body() body: createArticleDto, @User() user) {
