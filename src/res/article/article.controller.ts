@@ -1,10 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards, UseInterceptors } from "@nestjs/common";
 import { ArticleService } from "./article.service";
 import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
 import { User } from "../src/user.decorator";
 import { createArticleDto } from "src/dtos/article/create-article.dto";
 import { ApiBearerAuth, ApiBody, ApiOperation, ApiTags } from "@nestjs/swagger";
+import { undefinedToNullInterceptor } from "src/interceptors/undefinedToNull.interceptor";
 
+@UseInterceptors(undefinedToNullInterceptor)
 @ApiTags('게시글 API')
 @Controller('article')
 export class ArticleController {
