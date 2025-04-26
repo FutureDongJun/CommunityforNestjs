@@ -10,6 +10,6 @@ export class undefinedToNullInterceptor implements NestInterceptor {
         
         return next
         .handle()
-        .pipe(map((data) => (data === undefined ? null : data)));
+        .pipe(map((data) => (data === undefined ? null : data))); //JSON undefined는 명시가 되지 않기 때문에 null로 명시되도록하는 인터셉터
     }
 }
