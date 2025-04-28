@@ -15,7 +15,7 @@ async function bootstrap() {
   .build();
 
   const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('api-docs', app, document); // 'api-docs'는 swagger 문서로 접속할 url임.
+  SwaggerModule.setup('api-docs', app, document); // 'api-docs'는 swagger 문서로 접속할 url임
   
 
   await app.listen(process.env.PORT ?? 3000);
