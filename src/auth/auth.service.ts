@@ -20,7 +20,7 @@ export class AuthService {
         });
 
         if(!user) {
-            throw new BadRequestException('이메일이 잘못되었습니다');
+            throw new BadRequestException('이메일이 잘못되었습니다!');
         }
 
         //verify password 과정
